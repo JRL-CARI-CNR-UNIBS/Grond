@@ -1,0 +1,42 @@
+bf_lidar:
+  ros__parameters:
+    host: "192.168.50.1"
+    frame_id: "lidar"
+    remap: true
+    publish_ambient_light: false
+    publish_explicit_range: false
+    publish_intensities: false
+    publish_no_return_points: false
+    publish_point_id: true
+    publish_point_time_offset: false
+    no_return_point_range: 1.0
+    returns_publishing_options: "strongest"
+    projection_type: angle_preserving
+    publish_ambient_image: false
+    publish_intensity_image: false
+    publish_range_image: false
+    publish_point_id_image: true
+    imu_acceleration_unit: "g"
+    publish_imu: true
+    publish_imu_static_tf_at_start: true
+    use_lidar_timestamp: false
+    logging_throttled_interval: 10000
+    use_background_subtraction: false
+    use_neighbor_filter: false
+    background_subtraction_exponential_decay_rate: 0.005
+    background_subtraction_num_initialization_frames: 10
+
+pointcloud_to_laserscan_node:
+  ros__parameters:
+    target_frame: 'lidar'
+    transform_tolerance: 0.01
+    min_height: -1.0
+    max_height: 2.0
+    angle_min: -3.0  # -M_PI/2
+    angle_max: 3.0  # M_PI/2
+    angle_increment: 0.00087  # M_PI/360.0
+    scan_time: 0.3333
+    range_min: 0.1
+    range_max: 10.0
+    use_inf: True
+    inf_epsilon: 1.0
