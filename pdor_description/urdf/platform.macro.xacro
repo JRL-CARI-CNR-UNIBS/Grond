@@ -1,0 +1,169 @@
+<?xml version = "1.0"?>
+<robot name = "platform" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<xacro:macro name="pdor_base" params="prefix">
+
+  <link name="${prefix}base_footprint"/>
+
+  <xacro:include filename="$(find pdor_description)/config/materials.urdf" />
+
+<!-- Base structure -->
+
+  <link name="${prefix}core">
+    <visual>
+      <geometry>
+        <box size="${1.060} ${(0.730-(0.165*2))} ${(0.600-0.025)}"/>
+      </geometry>
+      <material name="grey"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="${1.060} ${(0.730-(0.165*2))} ${(0.600-0.025)}"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="${prefix}barrier_right">
+    <visual>
+      <geometry>
+        <box size="${1.270} ${(0.125+0.040)} ${(0.310-0.025)}"/>
+      </geometry>
+      <material name="grey"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="${1.270} ${(0.125+0.040)} ${(0.310-0.025)}"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="${prefix}barrier_left">
+    <visual>
+      <geometry>
+        <box size="${1.270} ${(0.125+0.040)} ${(0.310-0.025)}"/>
+      </geometry>
+      <material name="grey"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="${1.270} ${(0.125+0.040)} ${(0.310-0.025)}"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="move_core" type="fixed">
+    <parent link="${prefix}base_footprint"/>
+    <child link="${prefix}core"/>
+    <origin xyz="0.0 0.0 ${(0.290+0.310)/2}"/>
+  </joint>
+
+  <joint name="move_barrier_right" type="fixed">
+    <parent link="${prefix}core"/>
+    <child link="${prefix}barrier_right"/>
+    <origin xyz="0.0 ${-0.730/2+0.165/2} ${-(0.290+0.310)/2+(0.310)/2}"/>
+  </joint>
+
+  <joint name="move_barrier_left" type="fixed">
+    <parent link="${prefix}core"/>
+    <child link="${prefix}barrier_left"/>
+    <origin xyz="0.0 ${+0.730/2-0.165/2} ${-(0.290+0.310)/2+(0.310)/2}"/>
+  </joint>
+
+<!-- Wheels -->
+
+<link name="${prefix}front_axis"/>
+<link name="${prefix}wheel_front_right">
+  <visual>
+    <geometry>
+      <cylinder radius="0.100" length="0.100"/>
+    </geometry>
+    <material name="blue"/>
+  </visual>
+  <collision>
+    <geometry>
+      <cylinder radius="0.100" length="0.100"/>
+    </geometry>
+  </collision>
+</link>
+<link name="${prefix}wheel_front_left">
+  <visual>
+    <geometry>
+      <cylinder radius="0.100" length="0.100"/>
+    </geometry>
+    <material name="blue"/>
+  </visual>
+  <collision>
+    <geometry>
+      <cylinder radius="0.100" length="0.100"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="${prefix}back_axis"/>
+<link name="${prefix}wheel_back_right">
+  <visual>
+    <geometry>
+      <cylinder radius="0.100" length="0.100"/>
+    </geometry>
+    <material name="blue"/>
+  </visual>
+  <collision>
+    <geometry>
+      <cylinder radius="0.100" length="0.100"/>
+    </geometry>
+  </collision>
+</link>
+<link name="${prefix}wheel_back_left">
+  <visual>
+    <geometry>
+      <cylinder radius="0.100" length="0.100"/>
+    </geometry>
+    <material name="blue"/>
+  </visual>
+  <collision>
+    <geometry>
+      <cylinder radius="0.100" length="0.100"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="move_front_axis" type="fixed">
+  <parent link="${prefix}base_footprint"/>
+  <child link="${prefix}front_axis"/>
+  <origin xyz="${1.270/2 - 0.20} ${0.0} ${0.10}"/>
+</joint>
+<joint name="wheel_front_right_joint" type="continuous">
+  <parent link="${prefix}front_axis"/>
+  <child link="${prefix}wheel_front_right"/>
+  <axis xyz="0 0 1"/>
+  <origin xyz="0.0 ${-0.730/2 + 0.100/2 - 0.025} 0.0" rpy="${pi/2} 0.0 0.0"/>
+</joint>
+<joint name="wheel_front_left_joint" type="continuous">
+  <parent link="${prefix}front_axis"/>
+  <child link="${prefix}wheel_front_left"/>
+  <axis xyz="0 0 1"/>
+  <origin xyz="0.0 ${0.730/2 - 0.100/2 + 0.025} 0.0" rpy="${-pi/2} 0.0 0.0"/>
+</joint>
+
+<joint name="move_back_axis" type="fixed">
+  <parent link="${prefix}base_footprint"/>
+  <child link="${prefix}back_axis"/>
+  <origin xyz="${-1.270/2 + 0.20} ${0.0} ${0.10}"/>
+</joint>
+<joint name="wheel_back_right_joint" type="continuous">
+  <parent link="${prefix}back_axis"/>
+  <child link="${prefix}wheel_back_right"/>
+  <axis xyz="0 0 1"/>
+  <origin xyz="0.0 ${-0.730/2 + 0.100/2 - 0.025} 0.0" rpy="${pi/2} 0.0 0.0"/>
+</joint>
+<joint name="wheel_back_left_joint" type="continuous">
+  <parent link="${prefix}back_axis"/>
+  <child link="${prefix}wheel_back_left"/>
+  <axis xyz="0 0 1"/>
+  <origin xyz="0.0 ${0.730/2 - 0.100/2 + 0.025} 0.0" rpy="${-pi/2} 0.0 0.0"/>
+</joint>
+
+
+</xacro:macro>
+
+</robot>

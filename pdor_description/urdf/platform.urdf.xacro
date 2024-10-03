@@ -4,12 +4,10 @@
 
     <!-- Import scara urdf file -->
     <xacro:include filename="$(find pdor_description)/urdf/platform.urdf" />
-
-    <!-- Import scara materials file -->
-    <xacro:include filename="$(find pdor_description)/config/materials.urdf" />
+    <xacro:pdor_base prefix=""/>
 
     <!-- Import scara ros2_control description -->
-    <xacro:include filename="$(find pdor_description)/urdf/ros2_control/platform.ros2_control.urdf" />
+    <!-- <xacro:include filename="$(find pdor_description)/urdf/platform.ros2_control.xacro" /> -->
 
 
 </robot>
