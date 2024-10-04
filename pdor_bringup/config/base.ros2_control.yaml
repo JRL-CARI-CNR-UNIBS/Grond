@@ -5,9 +5,12 @@ controller_manager:
     mecanum_controller:
       type: clearpath_mecanum_drive_controller/MecanumDriveController
 
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
 mecanum_controller:
   ros__parameters:
-    use_stamped_vel: false,
+    use_stamped_vel: false
     reference_timeout: 0.0
     command_timeout: 1.0
     command_joint_names:
