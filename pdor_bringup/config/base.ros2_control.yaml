@@ -14,10 +14,10 @@ mecanum_controller:
     reference_timeout: 0.0
     command_timeout: 1.0
     command_joint_names:
-      - wheel_front_right_joint
       - wheel_front_left_joint
-      - wheel_rear_right_joint
       - wheel_rear_left_joint
+      - wheel_rear_right_joint
+      - wheel_front_right_joint
     interface_name: velocity
     kinematics:
       base_frame_offset:
