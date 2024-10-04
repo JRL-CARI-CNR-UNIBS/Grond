@@ -23,7 +23,7 @@ def launch_setup(context):
   # Used only if pub_robot_description is true
   robot_description = Command(
       command=[FindExecutable(name='xacro'), ' ',
-           PathJoinSubstitution([FindPackageShare('pdor_description'), 'config', 'platform.urdf.xacro'])
+           PathJoinSubstitution([FindPackageShare('pdor_description'), 'urdf', 'platform.urdf.xacro'])
       ]
     )
 
