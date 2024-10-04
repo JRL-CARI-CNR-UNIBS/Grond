@@ -25,7 +25,7 @@ mecanum_controller:
         y: 0.0
         theta: 0.0
       wheels_radius: 0.1
-      sum_of_robot_center_projection_on_X_Y_axis: 1.590 # 0.870 + 0.720
+      sum_of_robot_center_projection_on_X_Y_axis: 0.795 # (0.870 + 0.720)/2
     base_frame_id: "base_footprint"
     odom_frame_id: "odom"
     enable_odom_tf: true
