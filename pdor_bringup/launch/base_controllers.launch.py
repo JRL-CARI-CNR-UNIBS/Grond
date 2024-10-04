@@ -6,7 +6,7 @@ from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
 
 def generate_launch_description():
-  return LaunchDescription(OpaqueFunction(function=launch_setup))
+  return LaunchDescription([OpaqueFunction(function=launch_setup)])
 
 
 def launch_setup(context):
