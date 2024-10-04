@@ -2,12 +2,13 @@
 <!-- Scara manipulator -->
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="pdor_platform">
 
-    <!-- Import scara urdf file -->
-    <xacro:include filename="$(find pdor_description)/urdf/platform.urdf" />
-    <xacro:pdor_base prefix=""/>
+    <xacro:arg name="prefix" default=""/>
 
-    <!-- Import scara ros2_control description -->
-    <!-- <xacro:include filename="$(find pdor_description)/urdf/platform.ros2_control.xacro" /> -->
+    <xacro:include filename="$(find pdor_description)/urdf/platform.macro.xacro" />
+    <xacro:pdor_base prefix="$(arg prefix)"/>
+
+    <xacro:include filename="$(find pdor_description)/urdf/platform.ros2_control.xacro" />
+    <xacro:platform_ros2_control prefix="$(arg prefix)"/>
 
 
 </robot>
