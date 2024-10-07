@@ -22,32 +22,32 @@ from launch.substitutions import LaunchConfiguration
 from launch import LaunchDescription
 from launch_ros.actions import Node
 
-def trasform_publisher_with_target_frame(context):
-    point_to_laser_config_path = LaunchConfiguration('point_to_laser_config_path').perform(context)
+# def trasform_publisher_with_target_frame(context):
+#     point_to_laser_config_path = LaunchConfiguration('point_to_laser_config_path').perform(context)
     
-    target_frame = 'lidar'
-    try:
-        with open(point_to_laser_config_path, 'r') as file:
-            config_file = yaml.safe_load(file)
-        target_frame = config_file.get('pointcloud_to_laserscan_node', {}).get(
-            'ros__parameters', {}).get('target_frame', 'lidar')
-    except FileNotFoundError:
-        print(f"Configuration file {point_to_laser_config_path} not found. Using default target frame: 'lidar'.")
-    except yaml.YAMLError as exc:
-        print(f"Error parsing YAML file: {exc}. Using default target frame: 'lidar'.")
+#     target_frame = 'lidar'
+#     try:
+#         with open(point_to_laser_config_path, 'r') as file:
+#             config_file = yaml.safe_load(file)
+#         target_frame = config_file.get('pointcloud_to_laserscan_node', {}).get(
+#             'ros__parameters', {}).get('target_frame', 'lidar')
+#     except FileNotFoundError:
+#         print(f"Configuration file {point_to_laser_config_path} not found. Using default target frame: 'lidar'.")
+#     except yaml.YAMLError as exc:
+#         print(f"Error parsing YAML file: {exc}. Using default target frame: 'lidar'.")
     
-    transform_pub_cmd = Node(
-        package='tf2_ros',
-        executable='static_transform_publisher',
-        name='static_transform_publisher',
-        arguments=[
-            '--x', '0', '--y', '0', '--z', '0',
-            '--qx', '0', '--qy', '0', '--qz', '0', '--qw', '1',
-            '--frame-id', 'map', '--child-frame-id', target_frame
-        ]
-    )
+#     transform_pub_cmd = Node(
+#         package='tf2_ros',
+#         executable='static_transform_publisher',
+#         name='static_transform_publisher',
+#         arguments=[
+#             '--x', '0', '--y', '0', '--z', '0',
+#             '--qx', '0', '--qy', '0', '--qz', '0', '--qw', '1',
+#             '--frame-id', 'map', '--child-frame-id', target_frame
+#         ]
+#     )
 
-    return [transform_pub_cmd]
+#     return [transform_pub_cmd]
 
 
 def generate_launch_description():
@@ -78,12 +78,12 @@ def generate_launch_description():
             name='pointcloud_to_laserscan'
         )
     
-    trasform_publisher = OpaqueFunction(function = trasform_publisher_with_target_frame)
+    # trasform_publisher = OpaqueFunction(function = trasform_publisher_with_target_frame)
 
     ld = LaunchDescription()
     ld.add_action(namespace_scanner_cmd)
     ld.add_action(point_to_laser_config_cmd)
     ld.add_action(point_to_laser_cmd)
-    ld.add_action(trasform_publisher)
+    # ld.add_action(trasform_publisher)
 
     return ld

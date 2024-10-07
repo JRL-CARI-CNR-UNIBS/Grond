@@ -163,6 +163,13 @@
   <origin xyz="0.0 ${0.730/2 - 0.100/2} 0.0" rpy="${-pi/2} 0.0 0.0"/>
 </joint>
 
+<!-- Lidar -->
+<link name="${prefix}lidar"/>
+<joint name="core_to_lidar" type="fixed">
+  <parent link="${prefix}front_axis"/>
+  <child link="${prefix}lidar"/>
+  <origin xyz="0 0 ${0.35}"/>
+</joint>
 
 </xacro:macro>
 
