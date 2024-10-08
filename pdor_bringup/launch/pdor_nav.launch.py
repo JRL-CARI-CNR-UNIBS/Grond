@@ -61,10 +61,10 @@ def launch_setup(context):
     parameters=[{'node_names' : [
                                 'controller_server',
                                  'planner_server',
-                                #  'bt_navigator',
-                                #  'map_server',
-                                #  'amcl',
-                                #  'behavior_server_node'
+                                 #'bt_navigator',
+                                 #'map_server',
+                                 #'amcl',
+                                 #'behavior_server_node'
                                  ],
                   'bond_timeout' : 0.0,
                   'autostart' : True,
@@ -73,10 +73,10 @@ def launch_setup(context):
 
   return [
     lifecycle_manager_node,
-    # bt_navigator_node,
-    # map_server_node,
-    # amcl_node,
+    #bt_navigator_node,
+    #map_server_node,
+    #amcl_node,
     planner_server_node,
     controller_server_node,
-    # behavior_server_node,
+    #behavior_server_node,
   ]
