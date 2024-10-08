@@ -40,7 +40,8 @@ def launch_setup(context):
     output='screen',
     parameters=[controller_params_file],
     remappings=[('/controller_manager/robot_description', '/robot_description'),
-                ('/mecanum_controller/tf_odometry', '/tf')],
+                ('/mecanum_controller/tf_odometry', '/tf'),
+                ('/mecanum_controller/cmd_vel_unstamped','/cmd_vel')],
   )
 
   mecanum_controller_spawner = Node(
