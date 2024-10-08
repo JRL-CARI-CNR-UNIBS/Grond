@@ -73,10 +73,10 @@ def launch_setup(context):
 
   return [
     lifecycle_manager_node,
-    #bt_navigator_node,
+    bt_navigator_node,
     #map_server_node,
     #amcl_node,
     planner_server_node,
     controller_server_node,
-    #behavior_server_node,
+    behavior_server_node,
   ]
