@@ -13,8 +13,8 @@ class DirectionalPad(Node):
         # Publisher for /cmd_vel topic
         self.publisher_ = self.create_publisher(Twist, '/cmd_vel', 10)  # Create a publisher with a queue size of 10
 
-        self.max_lin_vel = 0.1
-        self.max_ang_vel = 0.1
+        self.max_lin_vel = 0.02
+        self.max_ang_vel = 0.02
 
         # State variables for button presses
         self.button_state = {
