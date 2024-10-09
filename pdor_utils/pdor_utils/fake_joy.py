@@ -29,7 +29,7 @@ class DirectionalPad(Node):
         # Set up the main application window
         self.root = tk.Tk()  # Initialize the main tkinter window
         self.root.title("Directional Pad")  # Set the window title
-        self.root.geometry("200x200")  # Set the window size
+        self.root.geometry("150x150")  # Set the window size
 
         # Create buttons
         self.create_buttons()
