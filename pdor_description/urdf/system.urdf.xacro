@@ -1,0 +1,7 @@
+<?xml version = "1.0"?>
+<robot name = "lampo_imm" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:include filename="$(find pdor_description)/urdf/system.xacro"/>
+  <xacro:lampo_imm prefix="lampo/" generate_ros2_control_tag="true"/>
+
+</robot>

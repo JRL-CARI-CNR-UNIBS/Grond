@@ -1,0 +1,58 @@
+<?xml version = "1.0"?>
+<robot name = "lampo_imm_macro" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:macro name="lampo_imm" params="prefix generate_ros2_control_tag">
+    <xacro:include filename="$(find ur_description)/urdf/ur_macro.xacro"/>
+    <xacro:include filename="$(find pdor_description)/urdf/platform.macro.xacro"/>
+
+    <xacro:pdor_base prefix="${prefix}"/>
+    <xacro:if value="${generate_ros2_control_tag}">
+      <xacro:include filename="$(find pdor_description)/urdf/platform.ros2_control.xacro"/>
+      <xacro:platform_ros2_control prefix="${prefix}"/>
+    </xacro:if>
+
+
+    <xacro:ur_robot
+      name="lampo_ur"
+      tf_prefix="${prefix}"
+      parent="${prefix}mount_frame"
+      joint_limits_parameters_file="$(find ur_description)/config/ur10e/joint_limits.yaml"
+      kinematics_parameters_file="$(find ur_description)/config/ur10e/default_kinematics.yaml"
+      physical_parameters_file="$(find ur_description)/config/ur10e/physical_parameters.yaml"
+      visual_parameters_file="$(find ur_description)/config/ur10e/visual_parameters.yaml"
+      generate_ros2_control_tag="${generate_ros2_control_tag}"
+      transmission_hw_interface="hardware_interface/PositionJointInterface"
+      safety_limits="false"
+      safety_pos_margin="0.15"
+      safety_k_position="20"
+      use_fake_hardware="false"
+      fake_sensor_commands="false"
+      sim_gazebo="false"
+      sim_ignition="false"
+      headless_mode="false"
+      initial_positions="${dict(shoulder_pan_joint=0.0,shoulder_lift_joint=-1.57,elbow_joint=0.0,wrist_1_joint=-1.57,wrist_2_joint=0.0,wrist_3_joint=0.0)}"
+      use_tool_communication="false"
+      tool_voltage="0"
+      tool_parity="0"
+      tool_baud_rate="115200"
+      tool_stop_bits="1"
+      tool_rx_idle_chars="1.5"
+      tool_tx_idle_chars="3.5"
+      tool_device_name="/tmp/ttyUR"
+      tool_tcp_port="54321"
+      robot_ip="0.0.0.0"
+      script_filename=""
+      output_recipe_filename=""
+      input_recipe_filename=""
+      reverse_port="50001"
+      script_sender_port="50002"
+      reverse_ip="0.0.0.0"
+      script_command_port="50004"
+      trajectory_port="50003"
+      non_blocking_read="true"
+      keep_alive_count="2"
+    >
+      <origin xyz="0 0 0" />
+    </xacro:ur_robot>
+
+  </xacro:macro>
+</robot>

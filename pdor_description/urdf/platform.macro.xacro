@@ -4,6 +4,13 @@
 <xacro:macro name="pdor_base" params="prefix">
 
   <link name="${prefix}base_footprint"/>
+  <link name="${prefix}mount_frame"/>
+  <joint name="mount_frame_joint" type="fixed">
+    <parent link="${prefix}base_footprint"/>
+    <child link="${prefix}mount_frame"/>
+    <origin xyz="0 0 ${0.290+0.310}"/>
+  </joint>
+
 
   <xacro:include filename="$(find pdor_description)/config/materials.urdf" />
 
