@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!-- Scara manipulator -->
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="grond_platform">
+
+    <xacro:arg name="prefix" default=""/>
+
+    <xacro:include filename="$(find grond_description)/urdf/platform.macro.xacro" />
+    <xacro:grond_base prefix="$(arg prefix)"/>
+
+    <xacro:include filename="$(find grond_description)/urdf/platform.ros2_control.xacro" />
+    <xacro:platform_ros2_control prefix="$(arg prefix)"/>
+
+
+</robot>

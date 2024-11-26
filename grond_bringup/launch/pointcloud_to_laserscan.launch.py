@@ -51,7 +51,7 @@ from launch_ros.actions import Node
 
 
 def generate_launch_description():
-    package_dir = get_package_share_directory('pdor_bringup')
+    package_dir = get_package_share_directory('grond_bringup')
 
     namespace_scanner_cmd = DeclareLaunchArgument(
         name='scanner', default_value='scanner',

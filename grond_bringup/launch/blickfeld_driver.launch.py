@@ -12,7 +12,7 @@ from launch_ros.descriptions import ComposableNode
 def generate_launch_description():
 
     """launch file for blickfeld scanner as a component"""
-    package_dir = get_package_share_directory('pdor_bringup')
+    package_dir = get_package_share_directory('grond_bringup')
 
     driver_config_file = os.path.join(package_dir, "config", "blickfeld_configuration.yaml")
     driver_config = None

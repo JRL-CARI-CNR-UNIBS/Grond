@@ -18,12 +18,12 @@ def generate_launch_description():
 
 def launch_setup(context):
 
-  controller_params_file = PathJoinSubstitution([FindPackageShare('pdor_bringup'), 'config', 'base.ros2_control.yaml'])
+  controller_params_file = PathJoinSubstitution([FindPackageShare('grond_bringup'), 'config', 'base.ros2_control.yaml'])
 
   # Used only if pub_robot_description is true
   robot_description = Command(
       command=[FindExecutable(name='xacro'), ' ',
-           PathJoinSubstitution([FindPackageShare('pdor_description'), 'urdf', 'platform.urdf.xacro'])
+           PathJoinSubstitution([FindPackageShare('grond_description'), 'urdf', 'platform.urdf.xacro'])
       ]
     )
 

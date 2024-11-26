@@ -12,7 +12,7 @@ def generate_launch_description():
 
 def launch_setup(context):
 
-  nav_params_file = PathJoinSubstitution([FindPackageShare('pdor_bringup'), 'config', 'nav_params.yaml'])
+  nav_params_file = PathJoinSubstitution([FindPackageShare('grond_bringup'), 'config', 'nav_params.yaml'])
   
   bt_navigator_node = Node(
     package='nav2_bt_navigator',

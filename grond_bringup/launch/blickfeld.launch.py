@@ -20,7 +20,7 @@ from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration
 
 def generate_launch_description():
-    package_dir = get_package_share_directory('pdor_bringup')
+    package_dir = get_package_share_directory('grond_bringup')
     # Dichiarazione degli argomenti
     scanner_arg = DeclareLaunchArgument(
         'scanner',

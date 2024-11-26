@@ -7,7 +7,7 @@ from launch_ros.substitutions import FindPackageShare
 def generate_launch_description():
     controllers_file = 'controllers.yaml'
 
-    description_package = 'pdor_description'
+    description_package = 'grond_description'
 
     robot_description_content = Command(
         [
@@ -52,23 +52,17 @@ def generate_launch_description():
         output='screen',
     )
 
-    keyboard_node = Node(
-        package='pdor_utils',
-        executable='key_publisher',
-	output='screen'
+    joy_node = Node(
+        package='joy',
+        executable='joy_node',
+        output='screen',
     )
 
-#    joy_node = Node(
-#        package='joy',
-#        executable='joy_node',
-#        output='screen',
-#    )
-
-#    joystick_publisher = Node(
-#        package='pdor_utils',
-#        executable='joystick_publisher',
-#        output='screen',
-#    )
+    joystick_publisher = Node(
+        package='grond_utils',
+        executable='joystick_publisher',
+        output='screen',
+    )
 
 
     # Create the launch description and populate
@@ -80,8 +74,7 @@ def generate_launch_description():
     ld.add_action(ros2_control_node)
     ld.add_action(velocity_controller_node)
     ld.add_action(jsb)
-    ld.add_action(keyboard_node)
- #   ld.add_action(joy_node)
- #   ld.add_action(joystick_publisher)
+    ld.add_action(joy_node)
+    ld.add_action(joystick_publisher)
 
     return ld

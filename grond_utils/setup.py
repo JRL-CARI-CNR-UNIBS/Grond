@@ -1,7 +1,7 @@
 from setuptools import find_packages, setup
 import os
 import glob
-package_name = 'pdor_utils'
+package_name = 'grond_utils'
 
 setup(
     name=package_name,
@@ -24,9 +24,9 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'velocity_publisher = pdor_utils.test_pub:main',
-            'key_publisher = pdor_utils.key_publisher:main',
-            'joystick_publisher = pdor_utils.joystick_commander:main',
+            'velocity_publisher = grond_utils.test_pub:main',
+            'key_publisher = grond_utils.key_publisher:main',
+            'joystick_publisher = grond_utils.joystick_commander:main',
 
         ],
     },

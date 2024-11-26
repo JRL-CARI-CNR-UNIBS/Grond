@@ -74,7 +74,7 @@
             <param name="alias">0</param>
             <param name="position">0</param>
             <param name="mode_of_operation">9</param>
-            <param name="slave_config">$(find pdor_description)/config/elmo_sx.yaml</param>
+            <param name="slave_config">$(find grond_description)/config/elmo_sx.yaml</param>
         </ec_module>
     </joint>
     
@@ -89,7 +89,7 @@
             <param name="alias">0</param>
             <param name="position">1</param>
             <param name="mode_of_operation">9</param>
-            <param name="slave_config">$(find pdor_description)/config/elmo_dx.yaml</param>
+            <param name="slave_config">$(find grond_description)/config/elmo_dx.yaml</param>
         </ec_module>
     </joint>
 
@@ -104,7 +104,7 @@
             <param name="alias">0</param>
             <param name="position">2</param>
             <param name="mode_of_operation">9</param>
-            <param name="slave_config">$(find pdor_description)/config/elmo_dx.yaml</param>
+            <param name="slave_config">$(find grond_description)/config/elmo_dx.yaml</param>
         </ec_module>
     </joint>
     
@@ -119,7 +119,7 @@
             <param name="alias">0</param>
             <param name="position">3</param>
             <param name="mode_of_operation">9</param>
-            <param name="slave_config">$(find pdor_description)/config/elmo_encoder_2000.yaml</param>
+            <param name="slave_config">$(find grond_description)/config/elmo_encoder_2000.yaml</param>
         </ec_module>
     </joint>
 

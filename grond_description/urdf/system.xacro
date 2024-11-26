@@ -2,11 +2,11 @@
 <robot name = "lampo_imm_macro" xmlns:xacro="http://www.ros.org/wiki/xacro">
   <xacro:macro name="lampo_imm" params="prefix generate_ros2_control_tag">
     <xacro:include filename="$(find ur_description)/urdf/ur_macro.xacro"/>
-    <xacro:include filename="$(find pdor_description)/urdf/platform.macro.xacro"/>
+    <xacro:include filename="$(find grond_description)/urdf/platform.macro.xacro"/>
 
-    <xacro:pdor_base prefix="${prefix}"/>
+    <xacro:grond_base prefix="${prefix}"/>
     <xacro:if value="${generate_ros2_control_tag}">
-      <xacro:include filename="$(find pdor_description)/urdf/platform.ros2_control.xacro"/>
+      <xacro:include filename="$(find grond_description)/urdf/platform.ros2_control.xacro"/>
       <xacro:platform_ros2_control prefix="${prefix}"/>
     </xacro:if>
 
