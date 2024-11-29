@@ -1,7 +1,9 @@
 <?xml version = "1.0"?>
 <robot name = "lampo_imm" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
+  <xacro:arg name="name" default="lampo"/>
+  <xacro:arg name="generate_ros2_control_tag" default="true"/>
   <xacro:include filename="$(find grond_description)/urdf/system.xacro"/>
-  <xacro:lampo_imm prefix="lampo/" generate_ros2_control_tag="true"/>
+  <xacro:lampo_imm prefix="$(arg name)/" generate_ros2_control_tag="true"/>
 
 </robot>
