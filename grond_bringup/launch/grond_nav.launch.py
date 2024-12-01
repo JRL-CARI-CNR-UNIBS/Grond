@@ -1,18 +1,21 @@
 from launch.launch_description import LaunchDescription
-from launch.actions import OpaqueFunction
-from launch.substitutions import PathJoinSubstitution
+from launch.actions import OpaqueFunction, DeclareLaunchArgument
+from launch.substitutions import PathJoinSubstitution, LaunchConfiguration
 
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
 
 def generate_launch_description():
+  args = [
+  ]
 
-  return LaunchDescription([OpaqueFunction(function=launch_setup)])
+  return LaunchDescription([*args, OpaqueFunction(function=launch_setup)])
 
 
 def launch_setup(context):
 
   nav_params_file = PathJoinSubstitution([FindPackageShare('grond_bringup'), 'config', 'nav_params.yaml'])
+  map_yaml_file = PathJoinSubstitution([FindPackageShare('grond_bringup'), 'config', 'map.yaml'])
   
   bt_navigator_node = Node(
     package='nav2_bt_navigator',
@@ -31,7 +34,9 @@ def launch_setup(context):
   map_server_node = Node(
     package='nav2_map_server',
     executable='map_server',
-    parameters=[nav_params_file, {"use_sim_time": False}]
+    parameters=[nav_params_file,
+                {'yaml_filename' : map_yaml_file},
+                {"use_sim_time": False}]
   )
 
   amcl_node = Node(
@@ -61,10 +66,10 @@ def launch_setup(context):
     parameters=[{'node_names' : [
                                 'controller_server',
                                  'planner_server',
-                                 #'bt_navigator',
-                                 #'map_server',
-                                 #'amcl',
-                                 #'behavior_server_node'
+                                 'bt_navigator',
+                                 'map_server',
+                                 'amcl',
+                                 'behavior_server_node'
                                  ],
                   'bond_timeout' : 0.0,
                   'autostart' : True,
@@ -74,8 +79,8 @@ def launch_setup(context):
   return [
     lifecycle_manager_node,
     bt_navigator_node,
-    #map_server_node,
-    #amcl_node,
+    map_server_node,
+    amcl_node,
     planner_server_node,
     controller_server_node,
     behavior_server_node,

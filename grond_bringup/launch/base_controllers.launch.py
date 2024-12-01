@@ -10,7 +10,7 @@ from launch_ros.parameter_descriptions import ParameterValue
 def generate_launch_description():
   args = list()
   args.append(
-    DeclareLaunchArgument(name='pub_robot_description', default_value='false', description='create robot_state_publisher to publish robot_descritpion')
+    DeclareLaunchArgument(name='publish_robot_description', default_value='true', description='create robot_state_publisher to publish robot_descritpion')
   )
 
   return LaunchDescription(args + [OpaqueFunction(function=launch_setup)])
@@ -20,7 +20,7 @@ def launch_setup(context):
 
   controller_params_file = PathJoinSubstitution([FindPackageShare('grond_bringup'), 'config', 'base.ros2_control.yaml'])
 
-  # Used only if pub_robot_description is true
+  # Used only if publish_robot_description is true
   robot_description = Command(
       command=[FindExecutable(name='xacro'), ' ',
            PathJoinSubstitution([FindPackageShare('grond_description'), 'urdf', 'platform.urdf.xacro'])
@@ -30,7 +30,7 @@ def launch_setup(context):
   robot_state_publisher_node = Node(
     package='robot_state_publisher',
     executable='robot_state_publisher',
-    condition=IfCondition(LaunchConfiguration('pub_robot_description')),
+    condition=IfCondition(LaunchConfiguration('publish_robot_description')),
     parameters=[{'robot_description' : ParameterValue(value=robot_description, value_type=str)}]
   )
 
