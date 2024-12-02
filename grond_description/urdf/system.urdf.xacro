@@ -4,7 +4,8 @@
   <xacro:arg name="name" default="lampo"/>
   <xacro:arg name="generate_ros2_control_tag" default="true"/>
   <xacro:arg name="sim_gz" default="false"/>
+  <xacro:arg name="use_fake_ur" default="false"/>
   <xacro:include filename="$(find grond_description)/urdf/system.xacro"/>
-  <xacro:lampo_imm prefix="$(arg name)/" generate_ros2_control_tag="true" sim_gz="$(arg sim_gz)"/>
+  <xacro:lampo_imm prefix="$(arg name)/" generate_ros2_control_tag="true" sim_gz="$(arg sim_gz)" use_fake_ur="$(arg use_fake_ur)"/>
 
 </robot>
