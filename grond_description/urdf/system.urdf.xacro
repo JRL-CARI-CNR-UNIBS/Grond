@@ -3,7 +3,8 @@
 
   <xacro:arg name="name" default="lampo"/>
   <xacro:arg name="generate_ros2_control_tag" default="true"/>
+  <xacro:arg name="sim_gz" default="false"/>
   <xacro:include filename="$(find grond_description)/urdf/system.xacro"/>
-  <xacro:lampo_imm prefix="$(arg name)/" generate_ros2_control_tag="true"/>
+  <xacro:lampo_imm prefix="$(arg name)/" generate_ros2_control_tag="true" sim_gz="$(arg sim_gz)"/>
 
 </robot>
