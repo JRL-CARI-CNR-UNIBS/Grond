@@ -60,7 +60,6 @@ def generate_launch_description():
     )
 
     ld = LaunchDescription()
-    ld.add_action(scanner_arg)
     ld.add_action(config_arg)
     ld.add_action(blickfeld_driver_cmd)
     ld.add_action(point_to_laserscan_cmd)

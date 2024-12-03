@@ -21,9 +21,10 @@ def launch_setup(context):
 
     driver_config = None
     # Load the parameters specific to ComposableNode
-    with open(LaunchConfiguration('config').perform(context), "r") as yaml_file:
-        driver_config = yaml.safe_load(yaml_file)["bf_lidar"]["ros__parameters"]
-        frame_id = driver_config["frame_id"]
+#    with open(LaunchConfiguration('config').perform(context), "r") as yaml_file:
+#        driver_config = yaml.safe_load(yaml_file)["bf_lidar"]["ros__parameters"]
+#        frame_id = driver_config["frame_id"]
+    driver_config = LaunchConfiguration('config')
 
     container = ComposableNodeContainer(
         name="custom_container",
