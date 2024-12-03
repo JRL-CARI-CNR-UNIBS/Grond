@@ -72,8 +72,7 @@ def generate_launch_description():
     
     point_to_laser_cmd = Node(
             package='pointcloud_to_laserscan', executable='pointcloud_to_laserscan_node',
-            remappings=[('cloud_in', '/blickfeld_cube1_front/points_raw'),
-                        ('scan', [LaunchConfiguration(variable_name='scanner'), '/scan'])],
+            remappings=[('cloud_in', '/blickfeld_cube1_front/points_raw')], # topic per laser: ~/scan 
             parameters=[LaunchConfiguration('point_to_laser_config_path')],
             name='pointcloud_to_laserscan'
         )

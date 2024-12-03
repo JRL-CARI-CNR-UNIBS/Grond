@@ -22,18 +22,13 @@ from launch.substitutions import LaunchConfiguration
 def generate_launch_description():
     package_dir = get_package_share_directory('grond_bringup')
     # Dichiarazione degli argomenti
-    scanner_arg = DeclareLaunchArgument(
-        'scanner',
-        default_value='scanner',
-        description='Namespace for sample topics'
-    )
 
-    point_to_laser_config_path_arg = DeclareLaunchArgument(
-        'point_to_laser_config_path', 
+    config_arg = DeclareLaunchArgument(
+        'config', 
         default_value=os.path.join(
             package_dir, 
             'config', 'blickfeld_configuration.yaml'),
-        description='Path to the config file for the point to laser node'
+        description='Path to the config file for the point to laser node and the blickfeld driver'
     )
 
     # Launch file for pointcloud_to_laserscan
@@ -53,20 +48,20 @@ def generate_launch_description():
     blickfeld_driver_cmd = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(blickfeld_driver_launch_file),
         launch_arguments={
-            'scanner': LaunchConfiguration('scanner'),
-            'point_to_laser_config_path': LaunchConfiguration('point_to_laser_config_path')
+            'config': LaunchConfiguration('config')
         }.items()
     )
 
     point_to_laserscan_cmd = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(pointcloud_to_laserscan_launch_file),
         launch_arguments={
+            'config' : LaunchConfiguration('config')
         }.items()
     )
 
     ld = LaunchDescription()
     ld.add_action(scanner_arg)
-    ld.add_action(point_to_laser_config_path_arg)
+    ld.add_action(config_arg)
     ld.add_action(blickfeld_driver_cmd)
     ld.add_action(point_to_laserscan_cmd)
     return ld

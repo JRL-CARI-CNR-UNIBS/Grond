@@ -11,13 +11,17 @@ from launch_ros.descriptions import ComposableNode
 
 def generate_launch_description():
 
-    """launch file for blickfeld scanner as a component"""
-    package_dir = get_package_share_directory('grond_bringup')
+    args = [
+        DeclareLaunchArgument(name='config', default_value=os.path.join(get_package_share_directory('grond_bringup'), "config", "blickfeld_configuration.yaml"))
+    ]
 
-    driver_config_file = os.path.join(package_dir, "config", "blickfeld_configuration.yaml")
+    return LaunchDescription([*args, OpaqueFunction(function=launch_setup)])
+
+def launch_setup(context):
+
     driver_config = None
     # Load the parameters specific to ComposableNode
-    with open(driver_config_file, "r") as yaml_file:
+    with open(LaunchConfiguration('config').perform(context), "r") as yaml_file:
         driver_config = yaml.safe_load(yaml_file)["bf_lidar"]["ros__parameters"]
         frame_id = driver_config["frame_id"]
 
@@ -56,7 +60,7 @@ def generate_launch_description():
     #     name='static_broadcaster_lidar'
     # )
 
-    return LaunchDescription([
+    return [
         container,
         # static_tf_broadcaster_node
-        ])
+        ]
