@@ -40,7 +40,7 @@
       tool_tx_idle_chars="3.5"
       tool_device_name="/tmp/ttyUR"
       tool_tcp_port="54321"
-      robot_ip="0.0.0.0"
+      robot_ip="192.168.10.2"
       script_filename=""
       output_recipe_filename=""
       input_recipe_filename=""
