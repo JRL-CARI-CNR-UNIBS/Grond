@@ -53,11 +53,6 @@ from launch_ros.actions import Node
 def generate_launch_description():
     package_dir = get_package_share_directory('grond_bringup')
 
-    namespace_scanner_cmd = DeclareLaunchArgument(
-        name='scanner', default_value='scanner',
-        description='Namespace for sample topics'
-    )
-
     default_point_to_laser_config_path = os.path.join(
         package_dir,
         'config',
@@ -65,22 +60,22 @@ def generate_launch_description():
     )
 
     point_to_laser_config_cmd = DeclareLaunchArgument(
-        name='point_to_laser_config_path', 
+        name='config', 
         default_value=default_point_to_laser_config_path,
         description='Path to the config file for the point to laser node'
     )
     
     point_to_laser_cmd = Node(
-            package='pointcloud_to_laserscan', executable='pointcloud_to_laserscan_node',
-            remappings=[('cloud_in', '/blickfeld_cube1_front/points_raw')], # topic per laser: ~/scan 
-            parameters=[LaunchConfiguration('point_to_laser_config_path')],
+            package='pointcloud_to_laserscan', 
+            executable='pointcloud_to_laserscan_node',
+            remappings=[('cloud_in', 'blickfeld_cube1_front/points_raw')], # topic per laser: scan 
+            parameters=[LaunchConfiguration('config')],
             name='pointcloud_to_laserscan'
         )
     
     # trasform_publisher = OpaqueFunction(function = trasform_publisher_with_target_frame)
 
     ld = LaunchDescription()
-    ld.add_action(namespace_scanner_cmd)
     ld.add_action(point_to_laser_config_cmd)
     ld.add_action(point_to_laser_cmd)
     # ld.add_action(trasform_publisher)
