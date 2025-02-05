@@ -42,12 +42,12 @@ grond:
   admittance_controller:
     ros__parameters:
       joints:
-        - grond/joint_1
-        - grond/joint_2
-        - grond/joint_3
-        - grond/joint_4
-        - grond/joint_5
-        - grond/joint_6
+        - grond/shoulder_lift_joint
+        - grond/shoulder_pan_joint
+        - grond/elbow_joint
+        - grond/wrist_1_joint
+        - grond/wrist_2_joint
+        - grond/wrist_3_joint
       command_interfaces:
         - position
       state_interfaces:
@@ -61,12 +61,12 @@ grond:
         plugin_package: kinematics_interface
         base: grond/base_footprint
         tip: grond/tool0
-        group_name: omron_arm
+        group_name: grond_arm
         alpha: 0.0005
       ft_sensor:
         name: grond/tcp_fts_sensor
         frame:
-          id: grond/ft_frame
+          id: grond/flange
           external: false
         filter_coefficient: 0.005
       control:
@@ -79,7 +79,7 @@ grond:
           external: false
       gravity_compensation:
         frame:
-          id: grond/ft_frame
+          id: grond/flange
           external: false
         CoG: # TODO: To Change!!!!!!
           pos: [0.0, 0.0, 0.0]
@@ -116,5 +116,5 @@ grond:
 
   ft_broadcaster:
     ros__parameters:
-      frame_id: grond/ft_frame
+      frame_id: grond/flange
       sensor_name: grond/tcp_fts_sensor

@@ -1,7 +1,7 @@
 from launch_ros.actions.push_ros_namespace import PushRosNamespace
 from launch.launch_description import LaunchDescription
-from launch.substitutions import PathJoinSubstitution
-from launch.actions import OpaqueFunction, GroupAction
+from launch.substitutions import LaunchConfiguration, PathJoinSubstitution
+from launch.actions import DeclareLaunchArgument, OpaqueFunction, GroupAction
 
 from launch_ros.substitutions import FindPackageShare
 from launch_ros.actions import Node
@@ -11,7 +11,8 @@ import xacro
 
 def generate_launch_description():
   args = [
-
+    DeclareLaunchArgument(name='use_fake_base', default_value='false', description='mock for the base'),
+    DeclareLaunchArgument(name='use_fake_ur', default_value='false', description='mock for the ur')
   ]
 
   return LaunchDescription(args + [OpaqueFunction(function=launch_setup)])
@@ -21,8 +22,10 @@ def launch_setup(context):
   robot_description_path = PathJoinSubstitution([FindPackageShare('grond_description'), 'urdf','system.urdf.xacro']).perform(context)
   robot_description_args = {
     'name' : 'grond',
+    'use_fake_base' : LaunchConfiguration('use_fake_base').perform(context),
+    'use_fake_ur' : LaunchConfiguration('use_fake_ur').perform(context)
   }
-  robot_description = xacro.process(input_file_name=robot_description_path, mappings=robot_description_args).toprettyxml(indent=' ')
+  robot_description = xacro.process(input_file_name=robot_description_path, mappings=robot_description_args)
 
   ros2_controllers_config = PathJoinSubstitution([FindPackageShare('grond_bringup'), 'config', 'imm.ros2_control.yaml'])
 
@@ -35,7 +38,7 @@ def launch_setup(context):
   controller_manager = Node(
     package='controller_manager',
     executable='ros2_control_node',
-    parameters=[ros2_controllers_config],
+    parameters=[ros2_controllers_config, Parameter(name='robot_description', value=robot_description, value_type=str)],
     remappings=[
       ('controller_manager/robot_description', 'robot_description'),
       ('mecanum_controller/tf_odometry', '/tf'),
@@ -46,7 +49,7 @@ def launch_setup(context):
   joint_state_publisher_spawner = Node(
     package='controller_manager',
     executable='spawner',
-    arguments=['joint_state_publisher',
+    arguments=['joint_state_broadcaster',
       '--controller-manager', 'controller_manager']
   )
 
@@ -59,15 +62,15 @@ def launch_setup(context):
   admittance_controller_spawner = Node(
     package='controller_manager',
     executable='spawner',
-    arguments=['joint_state_publisher',
+    arguments=['admittance_controller',
       '--controller-manager', 'controller_manager']
   )
 
-  return GroupAction([
+  return [GroupAction([
     PushRosNamespace('grond'),
     robot_state_publisher,
     controller_manager,
     joint_state_publisher_spawner,
     admittance_controller_spawner,
     #mecanum_controller_spawner
-  ])
+  ])]
