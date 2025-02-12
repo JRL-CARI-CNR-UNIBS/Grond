@@ -6,9 +6,8 @@
             <hardware>
                 <plugin>ethercat_driver/EthercatDriver</plugin>
                 <param name="master_id">0</param>
-                <param name="control_frequency">1000</param>
+                <param name="control_frequency">100</param>
             </hardware>
-
             <joint name="${prefix}wheel_front_left_joint">
                 <state_interface name="position"/>
                 <state_interface name="velocity"/>
@@ -23,7 +22,6 @@
                     <param name="slave_config">$(find grond_description)/config/elmo_sx.yaml</param>
                 </ec_module>
             </joint>
-            
             <joint name="${prefix}wheel_front_right_joint">
                 <state_interface name="position"/>
                 <state_interface name="velocity"/>
@@ -68,7 +66,6 @@
                     <param name="slave_config">$(find grond_description)/config/elmo_encoder_2000.yaml</param>
                 </ec_module>
             </joint>
-
         </ros2_control>
     </xacro:macro>
 </robot>

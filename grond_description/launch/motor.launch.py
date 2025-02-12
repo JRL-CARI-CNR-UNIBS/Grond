@@ -59,7 +59,7 @@ def generate_launch_description():
 
     # nodes_to_start
     ld.add_action(ros2_control_node)
-    ld.add_action(velocity_controller_node)
+#    ld.add_action(velocity_controller_node)
     ld.add_action(jsb)
 
     return ld
