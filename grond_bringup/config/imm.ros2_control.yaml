@@ -1,0 +1,120 @@
+grond:
+  controller_manager:
+    ros__parameters:
+      update_rate: 100  # Hz
+
+      mecanum_controller:
+        type: clearpath_mecanum_drive_controller/MecanumDriveController
+
+      joint_state_broadcaster:
+        type: joint_state_broadcaster/JointStateBroadcaster
+
+      admittance_controller:
+        type: admittance_controller/AdmittanceController
+
+      ft_broadcaster:
+        type: force_torque_sensor_broadcaster/ForceTorqueSensorBroadcaster
+
+  mecanum_controller:
+    ros__parameters:
+      use_stamped_vel: false
+      reference_timeout: 0.0
+      command_timeout: 1.0
+      command_joint_names:
+        - wheel_front_left_joint
+        - wheel_rear_left_joint
+        - wheel_rear_right_joint
+        - wheel_front_right_joint
+      interface_name: velocity
+      kinematics:
+        base_frame_offset:
+          x: 0.0
+          y: 0.0
+          theta: 0.0
+        wheels_radius: 0.1
+        sum_of_robot_center_projection_on_X_Y_axis: 0.795 # (0.870 + 0.720)/2
+      base_frame_id: "robot_1/base_footprint"
+      odom_frame_id: "robot_1/odom"
+      enable_odom_tf: true
+      twist_covariance_diagonal: [0.1, 0.1, 0.1, 0.1, 0.1, 0.1]
+      pose_covariance_diagonal: [0.1, 0.1, 0.1, 0.1, 0.1, 0.1]
+
+  admittance_controller:
+    ros__parameters:
+      joints:
+        - grond/shoulder_lift_joint
+        - grond/shoulder_pan_joint
+        - grond/elbow_joint
+        - grond/wrist_1_joint
+        - grond/wrist_2_joint
+        - grond/wrist_3_joint
+      command_interfaces:
+        - position
+      state_interfaces:
+        - position
+        - velocity
+      chainable_command_interfaces:
+        - position
+        - velocity
+      kinematics:
+        plugin_name: kinematics_interface_kdl/KinematicsInterfaceKDL
+        plugin_package: kinematics_interface
+        base: grond/base_footprint
+        tip: grond/tool0
+        group_name: grond_arm
+        alpha: 0.0005
+      ft_sensor:
+        name: grond/tcp_fts_sensor
+        frame:
+          id: grond/flange
+          external: false
+        filter_coefficient: 0.005
+      control:
+        frame:
+          id: grond/base_footprint
+          external: false
+      fixed_world_frame:
+        frame:
+          id: grond/base_footprint
+          external: false
+      gravity_compensation:
+        frame:
+          id: grond/flange
+          external: false
+        CoG: # TODO: To Change!!!!!!
+          pos: [0.0, 0.0, 0.0]
+          force: 0.0
+      admittance:
+        selected_axes:
+          - true  # x
+          - false  # y
+          - false  # z
+          - false  # rx
+          - false  # ry
+          - false  # rz
+        mass: # F = M*a + D*v + S*(x - x_d)
+          - 100.0
+          - 100.0
+          - 100.0
+          - 100.0
+          - 100.0
+          - 100.0
+        damping_ratio: # damping can be used instead: zeta = D / (2 * sqrt( M * S ))
+          - 1.2
+          - 1.2
+          - 1.2
+          - 1.2
+          - 1.2
+          - 1.2
+        stiffness:
+          - 1000.0
+          - 1000.0
+          - 1000.0
+          - 1000.0
+          - 1000.0
+          - 1000.0
+
+  ft_broadcaster:
+    ros__parameters:
+      frame_id: grond/flange
+      sensor_name: grond/tcp_fts_sensor
