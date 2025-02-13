@@ -11,9 +11,9 @@ class DirectionalPad(Node):
         super().__init__('directional_pad_node')  # Initialize as a ROS2 node with a specified name
 
         # Publisher for /cmd_vel topic
-        self.publisher_ = self.create_publisher(Twist, '/cmd_vel', 10)  # Create a publisher with a queue size of 10
+        self.publisher_ = self.create_publisher(Twist, '/grond/cmd_vel', 10)  # Create a publisher with a queue size of 10
 
-        self.max_lin_vel = 0.1
+        self.max_lin_vel = 0.01
         self.max_ang_vel = 0.01
         self.previous_cmd = "STOP"
 
