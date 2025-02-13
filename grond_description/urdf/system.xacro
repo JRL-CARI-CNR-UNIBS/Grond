@@ -52,7 +52,7 @@
       non_blocking_read="true"
       keep_alive_count="2"
     >
-      <origin xyz="0 0 0" />
+      <origin xyz="0 0 0" rpy="0 0 ${-pi/2}" />
     </xacro:ur_robot>
 
   </xacro:macro>

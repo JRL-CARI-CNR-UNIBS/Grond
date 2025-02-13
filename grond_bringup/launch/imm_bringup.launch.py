@@ -66,11 +66,19 @@ def launch_setup(context):
       '--controller-manager', 'controller_manager']
   )
 
+  ft_broadcaster_spawner = Node(
+    package='controller_manager',
+    executable='spawner',
+    arguments=['ft_broadcaster',
+      '--controller-manager', 'controller_manager']
+  )
+
   return [GroupAction([
     PushRosNamespace('grond'),
     robot_state_publisher,
     controller_manager,
     joint_state_publisher_spawner,
-    admittance_controller_spawner,
+    ft_broadcaster_spawner,
+    #admittance_controller_spawner,
     #mecanum_controller_spawner
   ])]
